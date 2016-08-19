@@ -1,0 +1,17 @@
+{
+  "name": "Weather-offline",
+  "short_name": "Weather",
+  "icons": [{
+    "src": "/static/images/cloud-128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "/static/images/cloud-256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A86C4",
+  "theme_color": "#0B7EB8"
+}
