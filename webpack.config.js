@@ -23,7 +23,7 @@ module.exports = function makeWebpackConfig() {
      * This is the object where all configuration gets set
      */
     var config = {
-        context: __dirname
+        context : __dirname
     };
 
     /**
@@ -34,7 +34,8 @@ module.exports = function makeWebpackConfig() {
     if ( isProd ) {
         config.devtool = 'source-map';
     } else {
-        config.devtool = 'eval-source-map';
+        //config.devtool = 'eval-source-map';
+        config.devtool = 'source-map';
     }
 
     // add debug messages
@@ -56,7 +57,7 @@ module.exports = function makeWebpackConfig() {
      * Reference: http://webpack.github.io/docs/configuration.html#output
      */
     config.output = isTest ? {} : {
-        path          : root('dist'),
+        path          : root('build'),
         publicPath    : isProd ? '/' : 'http://localhost:8080/',
         filename      : isProd ? 'js/[name].[hash].js' : 'js/[name].js',
         chunkFilename : isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
@@ -73,8 +74,10 @@ module.exports = function makeWebpackConfig() {
         extensions : ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
         alias      : {
             'app'    : 'src/app',
-            'common' : 'src/common'
-        }
+            'common' : 'src/common',
+            'public' : 'src/public'
+        },
+        modulesDirectories: ['web_modules','node_modules','app_modules']
     };
 
     /**
@@ -90,18 +93,18 @@ module.exports = function makeWebpackConfig() {
             {
                 test    : /\.ts$/,
                 loaders : ['ts', 'angular2-template-loader'],
-                exclude : [(isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/), /node_modules\/(?!(ng2-.+))/, /service-worker.js/]
+                exclude : [(isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/), /node_modules\/(?!(ng2-.+))/, /service-worker.ts/]
             },
 
             // Service-Worker
             {
                 test    : /\.ts$/,
-                loaders : ['ts', 'angular2-template-loader'],
-                include : [/service-worker.js/]
+                loaders : ['ts'],
+                include : [/service-worker.ts/]
             },
 
             // copy those assets to output
-            {test : /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader : 'file?name=fonts/[name].[hash].[ext]?'},
+            {test : /\.(png|jpe?g|gif|svg|woff2?|ttf|eot|ico)$/, loader : 'file?name=fonts/[name].[hash].[ext]?'},
 
             // Support for *.json files.
             {test : /\.json$/, loader : 'json'},
@@ -177,14 +180,16 @@ module.exports = function makeWebpackConfig() {
             // Reference: https://webpack.github.io/docs/code-splitting.html
             // Reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
             new CommonsChunkPlugin({
-                name : ['vendor', 'polyfills']
+                name : ['vendor', 'polyfills'],
+                minChunks: Infinity
             }),
 
             // Inject script and link tags into html files
             // Reference: https://github.com/ampedandwired/html-webpack-plugin
             new HtmlWebpackPlugin({
                 template       : './src/public/index.html',
-                chunksSortMode : 'dependency'
+                chunksSortMode : 'dependency',
+                excludeChunks: ['service-worker']
             }),
 
             // Extract css files
@@ -216,6 +221,7 @@ module.exports = function makeWebpackConfig() {
             }])
         );
     }
+
 
     /**
      * PostCSS

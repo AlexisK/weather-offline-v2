@@ -1,0 +1,4 @@
+<div class="widget" *ngIf="state.isLoaded">
+    <h1>Weather</h1>
+    <sw-weather-widget *ngFor="let place of places" [place]="place"></sw-weather-widget>
+</div>

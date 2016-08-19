@@ -105,7 +105,7 @@
       "attribute"
     ],
     "component-selector-type"       : [
-      true,
+      false,
       "element"
     ],
     "use-input-property-decorator"  : true,
@@ -122,7 +122,7 @@
       "sw"
     ],
     "component-selector-prefix"     : [
-      true,
+      false,
       "sw"
     ],
     "pipe-naming"                   : [

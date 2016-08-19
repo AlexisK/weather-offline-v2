@@ -1,0 +1,48 @@
+@import '../../../styles/sizes';
+@import '../../../styles/colors';
+
+.navbar {
+  height: $navbar-height;
+  background-color: $blue-1;
+  box-shadow: 0 0 8px $grey-5;
+
+  &-button {
+    width: $navbar-height; height: $navbar-height;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    .ico { fill:#fff; }
+
+    &.search {
+      position: absolute;
+      top: 0; right:0;
+      padding: 12px;
+    }
+  }
+
+  &-search {
+    position: absolute;
+    top: 0;
+    right: $navbar-height;
+    left: $navbar-height;
+    &-input {
+      width: 100%;
+      padding: 10px;
+      height: $navbar-height;
+      line-height: $navbar-height;
+      border: none;
+      background-color: transparent;
+      color:#fff;
+    }
+  }
+
+  &.focused {
+    background-color: #fff;
+
+    & .navbar-button .ico { fill:$blue-1; }
+
+    & .navbar-search-input { color:$grey-1; }
+  }
+}

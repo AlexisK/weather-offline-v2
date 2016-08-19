@@ -1,0 +1,7 @@
+<div class="navbar" [class.focused]="focusState">
+    <button class="navbar-button home" [ico]="'home'" routerLink="/"></button>
+    <div class="navbar-search">
+        <input type="text" class="navbar-search-input" title="search" placeholder="search..." (focus)="setFocusState(true)" (blur)="setFocusState(false)"/>
+    </div>
+    <button class="navbar-button search" [ico]="'loop'"></button>
+</div>

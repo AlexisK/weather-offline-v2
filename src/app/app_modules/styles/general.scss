@@ -1,0 +1,24 @@
+@import "colors";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div, a, input, select, textarea, button {
+  display: block;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+}
+
+input, select, textarea, button {
+  outline: none;
+}
+
+body {
+  display: block;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: $grey-8;
+}

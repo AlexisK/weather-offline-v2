@@ -1,0 +1,24 @@
+<div class="weather-widget" *ngIf="forecast">
+    <div class="weather-widget-image" [ico]="'cloud'"></div>
+    <h2>{{ forecast.location }}</h2>
+    <p>{{forecast.date}}</p>
+    <p>
+        <small>Sunrise: {{forecast.sunrise}}</small>
+        <small>Sunset: {{forecast.sunset}}</small>
+    </p>
+    <div class="line">
+        <div [ico]="'temp'"></div>
+        <div>{{forecast.temp}} ℃</div>
+    </div>
+    <div class="line">
+        <div [ico]="'rain'"></div>
+        <div>{{forecast.humidity}} %</div>
+    </div>
+    <div class="line">
+        <div [ico]="'wind'"></div>
+        <div>{{forecast.windSpeed}} km/h
+            <small>{{forecast.windTemp}} ℃</small>
+        </div>
+    </div>
+
+</div>

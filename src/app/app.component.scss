@@ -1,7 +1,23 @@
-body {
-    padding: 1em;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    margin-top: 50px;
-    display: block;
+
+@import "./app_modules/styles/sizes";
+@import "./app_modules/styles/colors";
+
+.main-content {
+
+    h1, h2, h3, p {
+        margin: 1em 0;
+    }
+
+    .widget {
+        margin: $space-1;
+        padding: $space-2;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 0 8px $grey-6;
+
+        & > *:first-child {
+            margin-top: 0;
+        }
+    }
 }
+
