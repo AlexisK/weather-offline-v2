@@ -8,12 +8,12 @@ import {StateService} from 'services';
     styleUrls   : ['./dashboard.component.scss']
 })
 
-export class DashboardComponent {
+export class DashboardPageComponent {
     constructor(public state: StateService) {
     }
 }
 
-export const route = {path : '', component : DashboardComponent};
+export const route = {path : '', component : DashboardPageComponent};
 
 
 

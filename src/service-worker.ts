@@ -59,13 +59,9 @@ self.addEventListener('fetch', function (ev: any) {
             return fetch(ev.request).then((resp: any) => {
                 let respCopy = resp.clone();
 
-                pathToCache.forEach(path => {
-                    if (ev.request.url.indexOf(path) === 0) {
-                        caches.open(cacheName).then((cache: any) => {
-                            cache.put(ev.request, respCopy);
+                caches.open(cacheName).then((cache: any) => {
+                    cache.put(ev.request, respCopy);
 
-                        });
-                    }
                 });
 
                 return resp;

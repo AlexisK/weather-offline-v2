@@ -5,7 +5,8 @@ import {WeatherService} from '../../services/weather.service';
 @Component({
     selector    : 'sw-weather-widget',
     templateUrl : './weather-widget.component.html',
-    styleUrls   : ['./weather-widget.component.scss']
+    styleUrls   : ['./weather-widget.component.scss'],
+    providers   : [WeatherService]
 })
 
 export class WeatherWidgetComponent implements AfterViewInit {

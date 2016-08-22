@@ -9,14 +9,14 @@ export const places = ['Kiev, UA', 'Tokyo, JP'];
     styleUrls   : ['./weather.component.scss']
 })
 
-export class WeatherComponent {
+export class WeatherPageComponent {
     private places = places;
 
     constructor(public state: StateService) {
     }
 }
 
-export const route = {path : 'weather', component : WeatherComponent};
+export const route = {path : 'weather', component : WeatherPageComponent};
 
 
 

@@ -20,6 +20,10 @@ export class ServiceWorkerService {
                 this.subscribtions[ev.data.command].forEach((func: Function) => func(ev.data, ev));
             }
         });
+
+        this.worker.controller.addEventListener('statechange', function() {
+            console.log(`\t\t${this.state}`);
+        });
     }
 
     subscribe(key: string, worker: Function) {
