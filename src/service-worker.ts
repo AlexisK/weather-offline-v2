@@ -1,7 +1,11 @@
 const cacheName = 'weather-offline-cache-v2-1';
 
 const filesToCache: string[] = [
-    '/'
+    '/',
+    'http://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic',
+    '/js/polyfills.js',
+    '/js/vendor.js',
+    '/js/app.js'
 ];
 
 const pathToCache: string[] = [
@@ -53,14 +57,18 @@ self.addEventListener('fetch', function (ev: any) {
 
             logFetched(ev.request.url);
             return fetch(ev.request).then((resp: any) => {
+                let respCopy = resp.clone();
+
                 pathToCache.forEach(path => {
                     if (ev.request.url.indexOf(path) === 0) {
                         caches.open(cacheName).then((cache: any) => {
-                            cache.put(ev.request, resp.clone());
-                            return resp;
+                            cache.put(ev.request, respCopy);
+
                         });
                     }
                 });
+
+                return resp;
             });
         })
     );

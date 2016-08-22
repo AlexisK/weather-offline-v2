@@ -99,12 +99,12 @@ module.exports = function makeWebpackConfig() {
             // Service-Worker
             {
                 test    : /\.ts$/,
-                loaders : ['ts'],
+                loaders : ['file?name=[name].js','ts'],
                 include : [/service-worker.ts/]
             },
 
             // copy those assets to output
-            {test : /\.(png|jpe?g|gif|svg|woff2?|ttf|eot|ico)$/, loader : 'file?name=fonts/[name].[hash].[ext]?'},
+            {test : /\.(png|jpe?g|gif|svg|woff2?|ttf|eot|ico)$/, loader : 'file?name=static/[name].[hash].[ext]?'},
 
             // Support for *.json files.
             {test : /\.json$/, loader : 'json'},

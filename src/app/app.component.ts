@@ -26,9 +26,9 @@ import {
 })
 export class AppComponent {
     constructor(private state: StateService) {
-        // if ('serviceWorker' in navigator) {
-        //     navigator['serviceWorker'].register('./js/service-worker.js');
-        // }
+        if ('serviceWorker' in navigator) {
+            navigator['serviceWorker'].register('./service-worker.js');
+        }
 
         state.isLoaded = true;
     }
