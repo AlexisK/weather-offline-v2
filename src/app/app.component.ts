@@ -35,12 +35,16 @@ export class AppComponent {
                 private serviceWorker: ServiceWorkerService,
                 private weatherService: WeatherService) {
         if ('serviceWorker' in navigator) {
-            navigator['serviceWorker'].register('./service-worker.js');
+            navigator['serviceWorker'].register('./service-worker.js', {scope : '.'});
 
-            serviceWorker.setWorker(navigator['serviceWorker']);
+            serviceWorker.setWorker(navigator['serviceWorker']).then(() => {
+                state.isLoaded = true;
+            });
             weatherService.precache(weatherPlaces);
+        } else {
+            alert('No service workers support!');
         }
 
-        state.isLoaded = true;
+
     }
 }

@@ -1,15 +1,18 @@
 const cacheName = 'weather-offline-cache-v2-1';
 
+const isDebug = false;
+const debug   = function (str: string, args?: any, kwargs?: any) {
+    if (isDebug) {
+        console.log(new Date(), '[Service Worker]', str, Array.prototype.slice.call(arguments, 1));
+    }
+};
+
 const filesToCache: string[] = [
     '/',
     'http://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic',
     '/js/polyfills.js',
     '/js/vendor.js',
     '/js/app.js'
-];
-
-const pathToCache: string[] = [
-    'https://query.yahooapis.com'
 ];
 
 const fetched: any      = [];
@@ -20,33 +23,40 @@ let caches = self['caches'];
 let fetch  = self['fetch'];
 
 
+//
+
+
 // Startup
 self.addEventListener('install', function (ev: any) {
-    console.log('[ServiceWorker] Install');
+    debug('Install');
     ev.waitUntil(
         caches.open(cacheName).then(function (cache: any) {
-            console.log('[ServiceWorker] Caching app shell');
+            debug('Caching app shell');
             return cache.addAll(filesToCache);
+        }).then(() => {
+            return self['skipWaiting']();
         })
     );
 });
 
 self.addEventListener('activate', function (ev: any) {
-    console.log('[ServiceWorker] Activate');
-    ev.waitUntil(
-        caches.keys().then(function (keyList: string[]) {
-            return Promise.all(keyList.map(function (key: string) {
-                if (key !== cacheName) {
-                    console.log('[ServiceWorker] Removing old cache', key);
-                    return caches.delete(key);
-                }
-            }));
-        })
-    );
+    debug('Activate');
+    ev.waitUntil(caches.keys().then(function (keyList: string[]) {
+        return Promise.all(keyList.map(function (key: string) {
+            if (key !== cacheName) {
+                debug('Removing old cache', key);
+                return caches.delete(key);
+            }
+        }));
+    }));
+
 });
 
 
-// Fetching requests
+//
+
+
+// Fetching XHR requests
 self.addEventListener('fetch', function (ev: any) {
 
     ev.respondWith(
@@ -77,15 +87,18 @@ function logFetched(url: string) {
 }
 
 function _logFetched() {
-    console.log('[ServiceWorker] Need to fetch:\n', fetched.join('\n'), '\n');
+    debug('Need to fetch:\n', fetched.join('\n'), '\n');
     fetched.length = 0;
 }
+
+
+//
 
 
 // Handling [client -> service worker -> client] messages
 const handlers = {
     'echo'  : function (req: any, resp: any, ev: any) {
-        console.log('[ServiceWorker] Echo', ev);
+        debug('Echo', ev);
     },
     'cache' : function (req: any, resp: any, ev: any) {
         console.log(ev);
@@ -106,5 +119,5 @@ self.addEventListener('message', function (ev: any) {
         }
     }
 
-    console.log('[ServiceWorker] message', ev.data);
+    debug('message', ev.data);
 });

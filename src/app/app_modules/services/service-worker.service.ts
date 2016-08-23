@@ -9,21 +9,35 @@ export class ServiceWorkerService {
     }
 
     setWorker(worker: any) {
-        if (!worker) {
-            throw new Error('No Worker!');
-        }
-
-        this.worker = worker;
-
-        this.worker.addEventListener('message', (ev: any) => {
-            if (ev.data && ev.data.command && this.subscribtions[ev.data.command]) {
-                this.subscribtions[ev.data.command].forEach((func: Function) => func(ev.data, ev));
+        return new Promise((resolve, reject) => {
+            if (!worker) {
+                throw new Error('No Worker!');
             }
+
+            this.worker = worker;
+
+            if (!this.worker.controller) {
+                window.location.reload();
+            }
+
+            this.worker.addEventListener('message', (ev: any) => {
+                if (ev.data && ev.data.command && this.subscribtions[ev.data.command]) {
+                    this.subscribtions[ev.data.command].forEach((func: Function) => func(ev.data, ev));
+                }
+            });
+
+            this.worker.addEventListener('controllerchange', (ev: any) => {
+                alert('controllerchange');
+                this.worker.controller.addEventListener('statechange', function () {
+                    alert('statechange');
+                    console.log(`\t\t[${this.state}]`);
+                });
+            });
+
+
+            resolve();
         });
 
-        this.worker.controller.addEventListener('statechange', function() {
-            console.log(`\t\t${this.state}`);
-        });
     }
 
     subscribe(key: string, worker: Function) {
