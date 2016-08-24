@@ -48,8 +48,8 @@ module.exports = function makeWebpackConfig() {
     config.entry = isTest ? {} : {
         'polyfills'      : './src/polyfills.ts',
         'vendor'         : './src/vendor.ts',
-        'service-worker' : './src/service-worker.ts',
-        'app'            : './src/main.ts' // our angular app
+        'service-worker' : './src/service-worker/service-worker.ts',
+        'app'            : './src/main.ts'
     };
 
     /**

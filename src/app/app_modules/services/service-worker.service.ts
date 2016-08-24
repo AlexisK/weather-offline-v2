@@ -2,10 +2,36 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ServiceWorkerService {
+    public registration: any;
     public worker: any;
+    private notificationsKey: string;
     private subscribtions: any = {};
 
     constructor() {
+    }
+
+    register(url: string) {
+        return Promise.all([
+            navigator['serviceWorker'].register(url, {scope : '.'})
+                .then((registration: any) => {
+                    this.registration = registration;
+
+                    registration.pushManager.subscribe({
+                        userVisibleOnly : true
+                    }).then((sub: any) => {
+                        this.notificationsKey = sub.endpoint.split('/').slice(-1)[0];
+
+                        console.log(`curl\
+                        --header "Authorization: key=AIzaSyCANL3FhIup5iX-R1lZlKIr2Z61yLzI6TQ"\
+                        --header "Content-Type: application/json"\
+                        https://android.googleapis.com/gcm/send\
+                        -d '${JSON.stringify({
+                            registration_ids : [this.notificationsKey]
+                        })}'`);
+                    });
+                }),
+            this.setWorker(navigator['serviceWorker'])
+        ]);
     }
 
     setWorker(worker: any) {
@@ -56,5 +82,9 @@ export class ServiceWorkerService {
             command : 'cache',
             path
         });
+    }
+
+    sendNotification(message: string) {
+
     }
 }

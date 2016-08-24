@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule}  from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {HTTP_PROVIDERS} from '@angular/http';
+import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {routing, appRoutingProviders} from './app.routing';
@@ -10,7 +11,8 @@ import {ServiceWorkerService, StateService, WeatherService} from 'services';
 @NgModule({
     imports      : [
         BrowserModule,
-        routing
+        routing,
+        FormsModule
     ],
     declarations : [
         AppComponent

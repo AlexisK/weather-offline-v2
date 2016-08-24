@@ -6,10 +6,10 @@
     </div>
     <div class="widget">
         <p>Form for push notification messages testing</p>
-        <form>
+        <form (submit)="submitMessage($event)">
             <label>
                 <span>Notification message</span>
-                <textarea placeholder="Type smth..."></textarea>
+                <textarea [(ngModel)]="data.text" name="text" placeholder="Type smth..."></textarea>
             </label>
             <input type="submit" value="Send"/>
         </form>

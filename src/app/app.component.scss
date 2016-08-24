@@ -25,11 +25,12 @@
 
     & > form {
       margin: 0;
-      padding: $space-2;
+      padding: $space-2 0 0 0;
       background-color: $grey-8;
 
       & > label {
         display: block;
+        margin: 0 $space-2;
 
         & > span {
           display: inline-block;
@@ -45,6 +46,19 @@
         & > textarea {
           min-height: 40px;
           resize: vertical;
+        }
+
+      }
+
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        margin: $space-2 0 0 0;
+        padding: $space-1 0;
+        text-align: center;
+        border-top: 1px solid $grey-6;
+        &:active {
+          background-color: $grey-9;
         }
       }
     }
