@@ -1,23 +1,67 @@
-
 @import "./app_modules/styles/sizes";
 @import "./app_modules/styles/colors";
 
 .main-content {
 
-    h1, h2, h3, p {
-        margin: 1em 0;
+  h1, h2, h3, p {
+    margin: 1em $space-3;
+  }
+
+  .widget {
+    margin: $space-1;
+    padding: $space-2 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 8px $grey-6;
+
+    & > *:first-child {
+      margin-top: 0;
     }
 
-    .widget {
-        margin: $space-1;
-        padding: $space-2;
-        background-color: #fff;
-        border-radius: 4px;
-        box-shadow: 0 0 8px $grey-6;
+    & > * {
+      margin-left: $space-2;
+      margin-right: $space-2;
+    }
 
-        & > *:first-child {
-            margin-top: 0;
+    & > form {
+      margin: 0;
+      padding: $space-2 0 0 0;
+      background-color: $grey-8;
+
+      & > label {
+        display: block;
+        margin: 0 $space-2;
+
+        & > span {
+          display: inline-block;
+          margin-bottom: 1em;
         }
+
+        & > textarea,
+        & > input,
+        & > select {
+          width: 100%;
+        }
+
+        & > textarea {
+          min-height: 40px;
+          resize: vertical;
+        }
+
+      }
+
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        margin: $space-2 0 0 0;
+        padding: $space-1 0;
+        text-align: center;
+        border-top: 1px solid $grey-6;
+        &:active {
+          background-color: $grey-9;
+        }
+      }
     }
+  }
 }
 

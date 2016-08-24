@@ -1,20 +1,26 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import '../public/css/styles.css';
 
-import {StateService} from 'services';
+import {
+    StateService,
+    ServiceWorkerService,
+    WeatherService
+} from 'services';
 import {
     NavbarComponent,
     LoaderScreenComponent,
     IcoPrefetchComponent,
     IcoComponent,
-    WeatherWidgetComponent
+    WeatherWidgetComponent,
 } from 'components';
+
+import {places as weatherPlaces} from './pages/weather/weather.component';
 
 @Component({
     selector      : 'sw-app',
     templateUrl   : './app.component.html',
     styleUrls     : ['./app_modules/styles/general.scss', './app.component.scss'],
-    providers     : [StateService],
+    providers     : [],
     directives    : [
         NavbarComponent,
         LoaderScreenComponent,
@@ -25,11 +31,20 @@ import {
     encapsulation : ViewEncapsulation.None
 })
 export class AppComponent {
-    constructor(private state: StateService) {
-        // if ('serviceWorker' in navigator) {
-        //     navigator['serviceWorker'].register('./js/service-worker.js');
-        // }
+    constructor(private state: StateService,
+                private serviceWorker: ServiceWorkerService,
+                private weatherService: WeatherService) {
+        if ('serviceWorker' in navigator) {
 
-        state.isLoaded = true;
+            serviceWorker.register('./service-worker.js').then(() => {
+                state.isLoaded = true;
+            });
+
+            weatherService.precache(weatherPlaces);
+        } else {
+            alert('No service workers support!');
+        }
+
+
     }
 }

@@ -19,7 +19,8 @@
     "test-watch": "karma start --no-single-run --auto-watch",
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
-    "start": "npm run server",
+    "local-server": "ws -d ./build -p 8080",
+    "start": "rm -rf ./build && mkdir ./build && cp -r ./src/public ./build/static && npm run watch",
     "postinstall": "npm run webdriver-update && typings install"
   },
   "dependencies": {
@@ -63,6 +64,7 @@
     "karma-remap-istanbul": "0.0.6",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "1.7.0",
+    "local-web-server": "^1.2.6",
     "node-sass": "^3.8.0",
     "null-loader": "0.1.1",
     "path": "^0.12.7",

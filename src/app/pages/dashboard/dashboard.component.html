@@ -1,4 +1,17 @@
-<div class="widget" *ngIf="state.isLoaded">
+<div *ngIf="state.isLoaded">
     <h1>Dashboard</h1>
-    <a routerLink="weather">Weather</a>
+    <div class="widget">
+        <p>"Weather" page gets data from yahoo api during "Loading" process</p>
+        <a routerLink="weather">To Weather</a>
+    </div>
+    <div class="widget">
+        <p>Form for push notification messages testing</p>
+        <form (submit)="submitMessage($event)">
+            <label>
+                <span>Notification message</span>
+                <textarea [(ngModel)]="data.text" name="text" placeholder="Type smth..."></textarea>
+            </label>
+            <input type="submit" value="Send"/>
+        </form>
+    </div>
 </div>

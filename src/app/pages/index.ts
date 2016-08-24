@@ -1,3 +1,3 @@
 
-export {DashboardComponent as dashboard} from './dashboard/dashboard.component';
-export {WeatherComponent as weather} from './weather/weather.component';
+export {DashboardPageComponent as dashboard} from './dashboard/dashboard.component';
+export {WeatherPageComponent as weather} from './weather/weather.component';
