@@ -20,7 +20,7 @@
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "local-server": "ws -d ./build -p 8080",
-    "start": "rm -rf ./build && mkdir ./build && cp -r ./src/public ./build/static && npm run watch",
+    "start": "rm -rf ./build && mkdir build && cp -r ./src/public ./build/static && npm run watch",
     "postinstall": "npm run webdriver-update && typings install"
   },
   "dependencies": {
