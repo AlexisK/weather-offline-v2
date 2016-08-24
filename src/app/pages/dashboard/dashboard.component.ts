@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
 import {StateService} from 'services';
+import {ServiceWorkerService} from "services";
 
 
 class FormPackage {
-    constructor(
-        public text: string = ''
-    ) {}
+    constructor(public command: string = 'displayNotiication',
+                public title: string = '',
+                public text: string = '') {
+    }
 }
 
 
@@ -18,12 +20,14 @@ class FormPackage {
 export class DashboardPageComponent {
     private data: FormPackage = new FormPackage();
 
-    constructor(public state: StateService) {
+    constructor(public state: StateService,
+                private serviceWorker: ServiceWorkerService) {
     }
 
     submitMessage(ev?: any) {
         ev.preventDefault();
         console.log(ev, this.data);
+        this.serviceWorker.req(this.data);
     }
 }
 

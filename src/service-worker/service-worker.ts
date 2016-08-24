@@ -108,6 +108,11 @@ function _logFetched() {
 // PUSH Notifications
 self.addEventListener('push', function (ev) {
     debug('Push message received', ev);
+
+    return self['registration'].showNotification('Hardcoded title!', {
+        body : 'Hard body!',
+        icon : 'Hard ico'
+    });
 });
 
 
@@ -123,6 +128,12 @@ const handlers = {
         console.log(ev);
         caches.open(cacheName).then((cache: any) => {
             cache.add(req.path);
+        });
+    },
+    'displayNotiication'           : function (req: any, resp: any, ev: any) {
+        return self['registration'].showNotification(req.title, {
+            body : req.text,
+            icon : 'Hard ico'
         });
     },
     'subscribeToNotifications'     : function (req: any, resp: any, ev: any) {

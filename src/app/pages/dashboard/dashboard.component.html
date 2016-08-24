@@ -9,7 +9,10 @@
         <form (submit)="submitMessage($event)">
             <label>
                 <span>Notification message</span>
-                <textarea [(ngModel)]="data.text" name="text" placeholder="Type smth..."></textarea>
+                <input type="text" [(ngModel)]="data.title" name="title" required placeholder="Title..."/>
+            </label>
+            <label>
+                <textarea [(ngModel)]="data.text" name="text" placeholder="Body..."></textarea>
             </label>
             <input type="submit" value="Send"/>
         </form>
