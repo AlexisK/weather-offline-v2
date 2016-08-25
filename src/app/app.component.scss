@@ -18,7 +18,8 @@
     box-shadow: 0 0 8px $grey-6;
 
     h1, h2, h3, p {
-      margin: 1em $space-3;
+      margin-top: 1em;
+      margin-bottom: 1em;
     }
 
     & > *:first-child {
@@ -31,6 +32,7 @@
     }
 
     & > form {
+      width: 100%;
       margin: 0;
       padding: $space-2 0 0 0;
       background-color: $grey-8;

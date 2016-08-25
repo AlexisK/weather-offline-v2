@@ -13,6 +13,7 @@ export class WeatherPageComponent {
     private places = places;
 
     constructor(public state: StateService) {
+        this.places = this.places || [];
     }
 }
 

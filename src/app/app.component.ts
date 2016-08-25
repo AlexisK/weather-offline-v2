@@ -6,6 +6,7 @@ import {
     ServiceWorkerService,
     WeatherService
 } from 'services';
+
 import {
     NavbarComponent,
     LoaderScreenComponent,
@@ -14,19 +15,26 @@ import {
     WeatherWidgetComponent,
 } from 'components';
 
+import {TooltipDirective} from 'directives';
+
 import {places as weatherPlaces} from './pages/weather/weather.component';
 
 @Component({
     selector      : 'sw-app',
     templateUrl   : './app.component.html',
-    styleUrls     : ['./app_modules/styles/general.scss', './app.component.scss'],
+    styleUrls     : [
+        './app_modules/styles/general.scss',
+        './app_modules/styles/tooltip.scss',
+        './app.component.scss'
+    ],
     providers     : [],
     directives    : [
         NavbarComponent,
         LoaderScreenComponent,
         IcoPrefetchComponent,
         IcoComponent,
-        WeatherWidgetComponent
+        WeatherWidgetComponent,
+        TooltipDirective
     ],
     encapsulation : ViewEncapsulation.None
 })

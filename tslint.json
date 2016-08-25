@@ -118,7 +118,7 @@
     "component-class-suffix"        : true,
     "directive-class-suffix"        : true,
     "directive-selector-prefix"     : [
-      true,
+      false,
       "sw"
     ],
     "component-selector-prefix"     : [

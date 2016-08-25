@@ -1,0 +1,86 @@
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+  &-inner {
+    position: absolute;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 5px 10px;
+
+    visibility: hidden;
+    opacity: 0.0;
+    background-color: #000;
+    color: #fff;
+    border-radius: 6px;
+
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+
+    z-index: 1;
+    transition: opacity .5s ease-out, visibility .5s;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      border: 5px solid;
+    }
+
+    &.left {
+      top: 50%;
+      right: 100%;
+      transform: translateY(-50%);
+      margin-right: 10px;
+      &::after {
+        left: 100%;
+        top: 50%;
+        margin-top: -5px;
+        border-color: transparent transparent transparent #000;
+      }
+    }
+    &.right {
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+      margin-left: 10px;
+      &::after {
+        right: 100%;
+        top: 50%;
+        margin-top: -5px;
+        border-color: transparent #000 transparent transparent;
+      }
+    }
+
+    &.top {
+      left: 50%;
+      bottom: 100%;
+      transform: translateX(-50%);
+      margin-bottom: 10px;
+      &::after {
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-color: #000 transparent transparent transparent;
+      }
+    }
+    &.bottom {
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      margin-top: 10px;
+      &::after {
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-color: transparent transparent #000 transparent;
+      }
+    }
+  }
+
+  &:hover > .tooltip-inner.on-hover,
+  &:focus > .tooltip-inner.on-focus {
+    visibility: visible;
+    opacity: 1.0;
+  }
+}

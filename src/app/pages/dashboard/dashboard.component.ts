@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
-import {StateService} from 'services';
-import {ServiceWorkerService} from "services";
+import {StateService, ServiceWorkerService} from 'services';
 
 
 class FormPackage {
-    constructor(public command: string = 'displayNotiication',
-                public title: string = '',
-                public text: string = '') {
+    constructor(public command = 'displayNotiication',
+                public title = '',
+                public text = '') {
     }
 }
 
